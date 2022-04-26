@@ -6,9 +6,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EventosComponent } from './eventos/eventos.component';
-import { PalestratantesComponent } from './palestratantes/palestratantes.component';
-import { NavComponent } from './nav/nav.component';
+import { EventosComponent } from './components/eventos/eventos.component';
+import { NavComponent } from './shared/nav/nav.component';
 import { EventoService } from './services/evento.service';
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 
@@ -20,14 +19,24 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ContatosComponent } from './components/contatos/contatos.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { TituloComponent } from './shared/titulo/titulo.component';
+import { PalestrantesComponent } from './components/palestrantes/palestrantes.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventosComponent,
-    PalestratantesComponent,
+    PalestrantesComponent,
+    ContatosComponent,
+    DashboardComponent,
+    PerfilComponent,
+    TituloComponent,
+
+    DateTimeFormatPipe,
     NavComponent,
-    DateTimeFormatPipe
   ],
   imports: [
     BrowserModule,

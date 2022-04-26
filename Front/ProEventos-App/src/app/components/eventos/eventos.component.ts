@@ -18,6 +18,7 @@ export class EventosComponent implements OnInit {
   mostrarImagem = true;
   private _filtroLista = '';
   titulo = 'Eventos';
+  botaoListar = false;
 
   public get filtroLista() : string {
     return this._filtroLista;
@@ -54,6 +55,7 @@ export class EventosComponent implements OnInit {
       (_evento: Evento[]) => {
         this.eventos = _evento;
         this.eventosFiltrados = this.eventos;
+        this.botaoListar = true;
         this.spinner.hide();
       },
       error => {

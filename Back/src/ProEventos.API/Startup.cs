@@ -10,6 +10,8 @@ using ProEventos.Application.Service;
 using ProEventos.Persistence.Context;
 using ProEventos.Persistence.Interface;
 using ProEventos.Persistence.Repository;
+using AutoMapper;
+using System;
 
 namespace ProEventos.API
 {
@@ -35,6 +37,8 @@ namespace ProEventos.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProEventos.API", Version = "v1" });
             });
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IEventoService, EventoService>();
             services.AddScoped<IGeralPersist, GeralPersist>();

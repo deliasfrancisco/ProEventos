@@ -14,8 +14,8 @@ import { Router } from '@angular/router';
 })
 export class EventoListaComponent implements OnInit {
   modalRef?: BsModalRef;
-  public eventos: any = [];
-  public eventosFiltrados: any = [];
+  public eventos: Array<Evento> = [];
+  public eventosFiltrados: Array<Evento> = [];
   mostrarImagem = true;
   private _filtroLista = '';
   titulo = 'Eventos';

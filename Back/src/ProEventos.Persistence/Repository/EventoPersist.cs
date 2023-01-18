@@ -42,6 +42,23 @@ namespace ProEventos.Persistence.Repository
             return (await _context.SaveChangesAsync()) > 0;
         }
 
+        public async Task<Evento> GetEventoByIdAsync(int EventoId, bool includePalestrantes)
+        {
+            IQueryable<Evento> query = _context.Eventos
+                .Include(e => e.Lotes)
+                .Include(e => e.RedeSociais);
+
+            if (includePalestrantes)
+            {
+                query = query.AsNoTracking()
+                    .Include(p => p.PalestrantesEventos) // se for verdadeiro irá incluir o palestrante porem somente o id
+                    .ThenInclude(p => p.Palestrante); // então inclua tambem o palestrante
+            }
+
+            query = query.OrderByDescending(c => c.DataEvento).Where(c => c.Id == EventoId);
+            return await query.FirstOrDefaultAsync();
+        }
+
         public async Task<Evento[]> GetAllEventosAsync(bool includePalestrantes = false)
         {
             IQueryable<Evento> query = _context.Eventos
@@ -58,23 +75,6 @@ namespace ProEventos.Persistence.Repository
             query = query.AsNoTracking()
                 .OrderByDescending(c => c.Id);
             return await query.ToArrayAsync();
-        }
-
-        public async Task<Evento> GetAllEventosAsyncById(int EventoId, bool includePalestrantes)
-        {
-            IQueryable<Evento> query = _context.Eventos
-                .Include(e => e.Lotes)
-                .Include(e => e.RedeSociais);
-
-            if (includePalestrantes)
-            {
-                query = query.AsNoTracking()
-                    .Include(p => p.PalestrantesEventos) // se for verdadeiro irá incluir o palestrante porem somente o id
-                    .ThenInclude(p => p.Palestrante); // então inclua tambem o palestrante
-            }
-
-            query = query.OrderByDescending(c => c.DataEvento).Where(c => c.Id == EventoId);
-            return await query.FirstOrDefaultAsync();
         }
 
         public async Task<Evento[]> GetAllEventosAsyncByTema(string tema, bool includePalestrantes)

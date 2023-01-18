@@ -2,7 +2,7 @@ import { Evento } from "./Evento"
 
 export interface Lote {
   Id:number
-  Nome:string
+  nome:string
   Preco:number
   DataInicio?:Date
   DataFim?:Date
